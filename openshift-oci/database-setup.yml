@@ -33,7 +33,7 @@ spec:
     emptyDir: {}
   containers:
   - name: tb-db-setup
-    imagePullPolicy: Always
+    imagePullPolicy: IfNotPresent
     image: thingsboard/tb-node:3.6.3
     env:
       - name: TB_SERVICE_ID

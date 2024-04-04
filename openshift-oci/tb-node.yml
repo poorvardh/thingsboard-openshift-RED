@@ -44,7 +44,7 @@ spec:
           emptyDir: {}
       containers:
       - name: server
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         image: thingsboard/tb-node:3.6.3
         ports:
         - containerPort: 8080

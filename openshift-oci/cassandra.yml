@@ -65,7 +65,7 @@ spec:
       containers:
       - name: cassandra
         image: cassandra:4.0.1
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 7000
           name: intra-node
@@ -126,6 +126,7 @@ spec:
   - metadata:
       name: cassandra-data
     spec:
+      storageClassName: "oci-bv"
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:

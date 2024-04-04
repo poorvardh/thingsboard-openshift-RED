@@ -31,7 +31,7 @@ spec:
     spec:
       containers:
       - name: server
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         image: thingsboard/tb-js-executor:3.6.3
         env:
         - name: REMOTE_JS_EVAL_REQUEST_TOPIC
@@ -80,7 +80,7 @@ spec:
               path:  logback.xml
       containers:
       - name: server
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         image: thingsboard/tb-mqtt-transport:3.6.3
         ports:
         - containerPort: 1883
@@ -116,6 +116,7 @@ spec:
     - metadata:
         name: logs
       spec:
+        storageClassName: "oci-bv"
         accessModes:
           - ReadWriteOnce
         resources:
@@ -163,7 +164,7 @@ spec:
               path:  logback.xml
       containers:
       - name: server
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         image: thingsboard/tb-http-transport:3.6.3
         ports:
         - containerPort: 8080
@@ -199,6 +200,7 @@ spec:
     - metadata:
         name: logs
       spec:
+        storageClassName: "oci-bv"
         accessModes:
           - ReadWriteOnce
         resources:
@@ -246,7 +248,7 @@ spec:
               path:  logback.xml
       containers:
       - name: server
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         image: thingsboard/tb-coap-transport:3.6.3
         ports:
         - containerPort: 5683
@@ -274,6 +276,7 @@ spec:
     - metadata:
         name: logs
       spec:
+        storageClassName: "oci-bv"
         accessModes:
           - ReadWriteOnce
         resources:
@@ -311,7 +314,7 @@ spec:
     spec:
       containers:
       - name: server
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         image: thingsboard/tb-web-ui:3.6.3
         ports:
         - containerPort: 8080
