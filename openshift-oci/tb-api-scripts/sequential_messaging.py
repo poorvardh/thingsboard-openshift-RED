@@ -12,22 +12,31 @@ logging.basicConfig(level=logging.DEBUG,
 def main():
     config = readConfig()
     csv_has_header = config['Config'].getboolean('csv_has_header')
+    time_offset = config['Config'].getint('time_offset')
+    time_step = config['Config'].getint('time_step')
     url = config['Config']['public_url_no_port']
     filename = config['Config']['csv_file']
     token = config['Config']['device_token']
 
-
     try: 
         client = connectMQTTclient(url, token, config)
+        currentTimeMs = round(time() * 1000)
+        startTime = currentTimeMs - time_offset #get current time in ms minus an offset
         with open(filename, 'r') as file:
             reader = csv.reader(file)
             idx = 0
             for row in reader:
-                idx = idx + 1
                 print(f'row {idx}')
-                sendMQTT(client, {'value': row})
+                idx = idx + 1
+                messageTime = (startTime + (idx * time_step))
+                messageData = {
+                    "ts": messageTime,
+                    "values": {"data": row}
+                }
+                sendMQTT(client, messageData)
         exit()
     except Exception as e:
+        print(f"Exception: {e}")
         if client:
             client.disconnect()
 
