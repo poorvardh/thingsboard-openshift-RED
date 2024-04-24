@@ -12,6 +12,8 @@ logging.basicConfig(level=logging.DEBUG,
 def main():
     config = readConfig()
     csv_has_header = config['Config'].getboolean('csv_has_header')
+    rows_per_message = config['Config'].getint('rows_per_message')
+    print(f'rows per message: {rows_per_message}')
     time_offset = config['Config'].getint('time_offset')
     time_step = config['Config'].getint('time_step')
     url = config['Config']['public_url_no_port']
@@ -22,18 +24,25 @@ def main():
         client = connectMQTTclient(url, token, config)
         currentTimeMs = round(time() * 1000)
         startTime = currentTimeMs - time_offset #get current time in ms minus an offset
+        messages = []
+
         with open(filename, 'r') as file:
             reader = csv.reader(file)
             idx = 0
             for row in reader:
-                print(f'row {idx}')
                 idx = idx + 1
+                rowlist = list(map(float,row)) #Get the csv row as a list of floats
                 messageTime = (startTime + (idx * time_step))
                 messageData = {
                     "ts": messageTime,
-                    "values": {"data": row}
+                    "values": {"data": rowlist}
                 }
-                sendMQTT(client, messageData)
+                messages.append(messageData)
+                if idx % rows_per_message == 0:
+                    sendMQTT(client, messages)
+                    messages = []
+            if idx % rows_per_message != 0:
+                sendMQTT(client, messages)
         exit()
     except Exception as e:
         print(f"Exception: {e}")
