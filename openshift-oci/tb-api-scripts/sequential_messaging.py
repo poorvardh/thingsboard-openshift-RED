@@ -13,7 +13,6 @@ def main():
     config = readConfig()
     csv_has_header = config['Config'].getboolean('csv_has_header')
     rows_per_message = config['Config'].getint('rows_per_message')
-    print(f'rows per message: {rows_per_message}')
     time_offset = config['Config'].getint('time_offset')
     time_step = config['Config'].getint('time_step')
     url = config['Config']['public_url_no_port']
