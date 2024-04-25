@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"tb-http-transport","namespace":"thingsboard"},"spec":{"ports":[{"name":"http","port":8080}],"selector":{"app":"tb-http-transport"},"type":"ClusterIP"}}
+  creationTimestamp: "2024-04-10T16:17:49Z"
+  name: tb-http-transport-external
+  namespace: thingsboard
+  resourceVersion: "77963"
+  uid: 1eabd096-d6fb-4e71-999b-227d1554c929
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: tb-http-transport
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
