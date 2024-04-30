@@ -1,0 +1,22 @@
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-storage-11
+spec:
+  capacity:
+    storage: 75Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/partition11
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: local-storage
+          operator: In
+          values:
+          - "yes"

@@ -62,10 +62,12 @@ spec:
                 path: ready-probe.sh
                 mode: 0777
       terminationGracePeriodSeconds: 60
+      imagePullSecrets:
+      - name: ocirsecret 
       containers:
       - name: cassandra
-        image: cassandra:4.0.1
-        imagePullPolicy: IfNotPresent
+        image: iad.ocir.io/idkvdaeqodv8/cassandra:4.0.1
+        imagePullPolicy: Always
         ports:
         - containerPort: 7000
           name: intra-node
@@ -126,7 +128,8 @@ spec:
   - metadata:
       name: cassandra-data
     spec:
-      storageClassName: "oci-bv"
+      #volumeName: pv-storage
+      storageClassName: local-storage
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:

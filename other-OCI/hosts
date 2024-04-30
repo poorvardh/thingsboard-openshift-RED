@@ -1,0 +1,28 @@
+10.145.142.179      tb-route-http-transport-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-route-node-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-route-node-root-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-route-web-ui-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-route-web-ui-index-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-route-web-ui-root-thingsboard.apps.ocired12.openshift.local
+
+
+10.145.142.179      tb-web-ui-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-database-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-http-transport-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-kafka-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-mqtt-transport-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-node-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      tb-redis-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      zookeeper-thingsboard.apps.ocired12.openshift.local
+10.145.142.179      zookeeper-headless-thingsboard.apps.ocired12.openshift.local
+
+
+
+
+10.145.142.167	api.ostb.rei.local
+10.145.142.167	oauth-openshift.apps.ostb.rei.local
+10.145.142.167	console-openshift-console.apps.ostb.rei.local
+10.145.142.167	grafana-openshift-monitoring.apps.ostb.rei.local
+10.145.142.167	thanos-querier-openshift-monitoring.apps.ostb.rei.local
+10.145.142.167	prometheus-k8s-openshift-monitoring.apps.ostb.rei.local
+10.145.142.167	alertmanager-main-openshift-monitoring.apps.ostb.rei.local

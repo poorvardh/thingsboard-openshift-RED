@@ -1,0 +1,32 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/host.generated: "true"
+  creationTimestamp: "2024-04-29T10:26:00Z"
+  name: tb-route-http-transport
+  namespace: thingsboard
+  resourceVersion: "3594190"
+  uid: d826c955-7c0c-452a-87a9-802b6ff1ad36
+spec:
+  host: tb-route-http-transport-thingsboard.apps.ocired12.openshift.local
+  path: /api/v1
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+  to:
+    kind: Service
+    name: tb-http-transport
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: "2024-04-29T10:26:00Z"
+      status: "True"
+      type: Admitted
+    host: tb-route-http-transport-thingsboard.apps.ocired12.openshift.local
+    routerCanonicalHostname: router-default.apps.ocired12.openshift.local
+    routerName: default
+    wildcardPolicy: None

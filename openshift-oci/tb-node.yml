@@ -42,10 +42,12 @@ spec:
               path:  logback.xml
         - name: tb-node-logs
           emptyDir: {}
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
       - name: server
-        imagePullPolicy: IfNotPresent
-        image: thingsboard/tb-node:3.6.3
+        imagePullPolicy: Always
+        image: iad.ocir.io/idkvdaeqodv8/thingsboard/tb-node:3.6.3
         ports:
         - containerPort: 8080
           name: http

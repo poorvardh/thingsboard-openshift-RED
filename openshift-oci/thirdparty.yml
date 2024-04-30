@@ -63,10 +63,12 @@ spec:
       labels:
         app: zookeeper
     spec:
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
         - name: zookeeper
-          imagePullPolicy: IfNotPresent
-          image: zookeeper:3.5.7
+          imagePullPolicy: Always
+          image: iad.ocir.io/idkvdaeqodv8/zookeeper:3.5.7
           ports:
             - containerPort: 2181
               name: client
@@ -109,7 +111,8 @@ spec:
     - metadata:
         name: data
       spec:
-        storageClassName: "oci-bv"
+        #volumeName: pv-storage
+        storageClassName: local-storage
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
@@ -117,7 +120,8 @@ spec:
     - metadata:
         name: datalog
       spec:
-        storageClassName: "oci-bv"
+        #volumeName: pv-storage
+        storageClassName: local-storage
         accessModes: [ "ReadWriteOnce" ]
         resources:
           requests:
@@ -215,10 +219,12 @@ spec:
       labels:
         app: tb-kafka
     spec:
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
         - name: server
-          imagePullPolicy: IfNotPresent
-          image: wurstmeister/kafka:2.12-2.2.1
+          imagePullPolicy: Always
+          image: iad.ocir.io/idkvdaeqodv8/wurstmeister/kafka:2.12-2.2.1
           ports:
             - containerPort: 9092
               name: kafka-int
@@ -291,7 +297,8 @@ spec:
     - metadata:
         name: logs
       spec:
-        storageClassName: "oci-bv"
+        #volumeName: pv-storage
+        storageClassName: local-storage
         accessModes:
           - ReadWriteOnce
         resources:
@@ -300,7 +307,8 @@ spec:
     - metadata:
         name: app-logs
       spec:
-        storageClassName: "oci-bv"
+        #volumeName: pv-storage
+        storageClassName: local-storage
         accessModes:
           - ReadWriteOnce
         resources:
@@ -309,7 +317,8 @@ spec:
     - metadata:
         name: config
       spec:
-        storageClassName: "oci-bv"
+        #volumeName: pv-storage
+        storageClassName: local-storage
         accessModes:
           - ReadWriteOnce
         resources:
@@ -344,10 +353,12 @@ spec:
       labels:
         app: tb-redis
     spec:
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
         - name: server
-          imagePullPolicy: IfNotPresent
-          image: redis:4.0
+          imagePullPolicy: Always
+          image: iad.ocir.io/idkvdaeqodv8/redis:4.0
           ports:
             - containerPort: 6379
           readinessProbe:

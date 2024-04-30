@@ -22,7 +22,8 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: "oci-bv"
+  #volumeName: pv-storage
+  storageClassName: local-storage
   accessModes:
     - ReadWriteOnce
   resources:
@@ -49,10 +50,12 @@ spec:
         - name: postgres-data
           persistentVolumeClaim:
             claimName: postgres-pv-claim
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
       - name: postgres
-        imagePullPolicy: IfNotPresent
-        image: postgres:12
+        imagePullPolicy: Always
+        image: iad.ocir.io/idkvdaeqodv8/postgres:12
         ports:
         - containerPort: 5432
           name: postgres

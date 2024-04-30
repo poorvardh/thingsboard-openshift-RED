@@ -1,3 +1,3 @@
 # Kubernetes resources configuration for ThingsBoard
 
-Here you can find scripts for deployment on different Kubernetes platforms.
+Here you can find scripts for deployment on Roving Edge Infrastructure.

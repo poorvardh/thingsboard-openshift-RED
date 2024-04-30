@@ -29,10 +29,12 @@ spec:
       labels:
         app: tb-js-executor
     spec:
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
       - name: server
-        imagePullPolicy: IfNotPresent
-        image: thingsboard/tb-js-executor:3.6.3
+        imagePullPolicy: Always
+        image: iad.ocir.io/idkvdaeqodv8/thingsboard/tb-js-executor:3.6.3
         env:
         - name: REMOTE_JS_EVAL_REQUEST_TOPIC
           value: "js_eval.requests"
@@ -78,10 +80,12 @@ spec:
               path:  tb-mqtt-transport.conf
             - key: logback
               path:  logback.xml
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
       - name: server
-        imagePullPolicy: IfNotPresent
-        image: thingsboard/tb-mqtt-transport:3.6.3
+        imagePullPolicy: Always
+        image: iad.ocir.io/idkvdaeqodv8/thingsboard/tb-mqtt-transport:3.6.3
         ports:
         - containerPort: 1883
           name: mqtt
@@ -116,7 +120,8 @@ spec:
     - metadata:
         name: logs
       spec:
-        storageClassName: "oci-bv"
+        #volumeName: pv-storage
+        storageClassName: local-storage
         accessModes:
           - ReadWriteOnce
         resources:
@@ -162,10 +167,12 @@ spec:
               path:  tb-http-transport.conf
             - key: logback
               path:  logback.xml
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
       - name: server
-        imagePullPolicy: IfNotPresent
-        image: thingsboard/tb-http-transport:3.6.3
+        imagePullPolicy: Always
+        image: iad.ocir.io/idkvdaeqodv8/thingsboard/tb-http-transport:3.6.3
         ports:
         - containerPort: 8080
           name: http
@@ -200,7 +207,8 @@ spec:
     - metadata:
         name: logs
       spec:
-        storageClassName: "oci-bv"
+        #volumeName: pv-storage
+        storageClassName: local-storage
         accessModes:
           - ReadWriteOnce
         resources:
@@ -246,10 +254,12 @@ spec:
               path:  tb-coap-transport.conf
             - key: logback
               path:  logback.xml
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
       - name: server
-        imagePullPolicy: IfNotPresent
-        image: thingsboard/tb-coap-transport:3.6.3
+        imagePullPolicy: Always
+        image: iad.ocir.io/idkvdaeqodv8/thingsboard/tb-coap-transport:3.6.3
         ports:
         - containerPort: 5683
           name: coap
@@ -276,7 +286,8 @@ spec:
     - metadata:
         name: logs
       spec:
-        storageClassName: "oci-bv"
+        #volumeName: pv-storage
+        storageClassName: local-storage
         accessModes:
           - ReadWriteOnce
         resources:
@@ -289,7 +300,7 @@ metadata:
   name: tb-coap-transport
   namespace: thingsboard
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   selector:
     app: tb-coap-transport
   ports:
@@ -312,10 +323,12 @@ spec:
       labels:
         app: tb-web-ui
     spec:
+      imagePullSecrets:
+      - name: ocirsecret
       containers:
       - name: server
-        imagePullPolicy: IfNotPresent
-        image: thingsboard/tb-web-ui:3.6.3
+        imagePullPolicy: Always
+        image: iad.ocir.io/idkvdaeqodv8/thingsboard/tb-web-ui:3.6.3
         ports:
         - containerPort: 8080
           name: http
